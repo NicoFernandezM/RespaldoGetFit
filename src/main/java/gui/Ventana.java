@@ -128,12 +128,12 @@ public abstract class Ventana extends JFrame {
 
     protected JTextArea generarAreaDeTexto (String texto, int x, int y, int ancho, int alto, String fuente, int tamaño) {
         JTextArea areaDeTexto = new JTextArea(texto);
+        this.add(areaDeTexto);
 
         areaDeTexto.setBounds(x, y, ancho, alto);
         Font font = new Font(fuente, Font.BOLD, tamaño);
         areaDeTexto.setFont(font);
         areaDeTexto.setEditable(false);
-        this.add(areaDeTexto);
 
         return areaDeTexto;
     }
@@ -151,8 +151,8 @@ public abstract class Ventana extends JFrame {
     protected JLabel generarLabelConGif(String direccion, int x, int y, int ancho, int alto) {
         ImageIcon imageIcon = new ImageIcon(direccion);
         Icon icon = new ImageIcon(String.valueOf(imageIcon));
-
         JLabel gif = new JLabel();
+        this.add(gif);
         gif.setIcon(icon);
         gif.setLayout(null);
         gif.setBounds(x, y, ancho, alto);

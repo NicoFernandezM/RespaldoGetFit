@@ -1,10 +1,11 @@
 package gui;
 
+import controlador.ArchivoDeTextoControlador;
+import utils.GetFitMath;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
  * Esta clase es la ventana que contiene la opción de ingresar el máximo de flexiones para eventualmente mostrar
@@ -12,7 +13,10 @@ import java.awt.event.ItemListener;
  * @author Nicolás Fernández
  */
 
-public class VentanaFlexiones extends Ventana implements ItemListener, ActionListener {
+public class VentanaFlexiones extends Ventana implements ActionListener {
+    private final String fuente = "Sabon Next LT";
+    private final int tamañoFuente = 14;
+
     private JComboBox numeroDeFlexiones;
 
     private JButton mostrarVideoBtn;
@@ -55,29 +59,52 @@ public class VentanaFlexiones extends Ventana implements ItemListener, ActionLis
     }
 
     /**
-     * Este método genera el JComboBox de la ventana y le agrega el ItemListener
+     * Este método genera el JComboBox de la ventana.
      */
 
     private void generarComboBox() {
         numeroDeFlexiones = this.generarComboBox(4, 30, 125, 220, 150, 30);
-        numeroDeFlexiones.addItemListener(this);
     }
 
-    @Override
-    public void itemStateChanged(ItemEvent e) {
+    private void mostrarRutina(){
+        this.generarAreaDeTexto("Recuerde descansar 2 minutos por serie.\n" + ciclo(),
+                50,400,300,120,fuente,tamañoFuente);
+    }
 
+    private String ciclo() {
+        int [] repsPorSerie = GetFitMath.generarRutinaDominadas(obtenerMaximoIngresado());
+        String a = "";
+
+        for (int i = 0; i < 4; i++) {
+
+            a += "\n Serie " + (i+1) + ": " +repsPorSerie[i] + " reps." ;
+        }
+
+        return a;
+    }
+
+    private void actualizarMaximasReps() {
+        int maxRepsFlexiones = obtenerMaximoIngresado();
+        int maxRepsDominadas = ArchivoDeTextoControlador.getInstancia().getUsuarioEnSesion().getMaxRepsDominadas();
+
+        ArchivoDeTextoControlador.getInstancia().editarUsuario(maxRepsFlexiones, maxRepsDominadas);
+    }
+
+    private int obtenerMaximoIngresado() {
+        return Integer.parseInt(numeroDeFlexiones.getSelectedItem().toString());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == aceptarBtn) {
-            //Guardar datos y mostrar ventana de tabla.
+            actualizarMaximasReps();
+            mostrarRutina();
         } else if(e.getSource() == regresarBtn) {
             this.dispose();
             new VentanaPrincipal();
         } else if(e.getSource() == mostrarVideoBtn) {
             this.dispose();
-            //new VentanaVideosFlexiones();
+            new VentanaVideosFlexiones();
         }
     }
 }

@@ -32,7 +32,7 @@ public class VentanaPrincipal extends Ventana implements ActionListener {
     private void generarBotones() {
         flexiones = this.generarBoton("Flexiones", 125, 200, 150, 80);
         dominadas = this.generarBoton("Dominadas",125, 300, 150, 80);
-        perfil = this.generarBoton(25, 25, 50, 50);
+        perfil = this.generarBoton("P", 25, 25, 50, 50);
 
         flexiones.addActionListener(this);
         dominadas.addActionListener(this);

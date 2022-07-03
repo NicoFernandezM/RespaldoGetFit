@@ -1,12 +1,11 @@
 package gui;
 
 import controlador.ArchivoDeTextoControlador;
+import utils.GetFitMath;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
  * Esta clase es la ventana que contiene la opción de ingresar el máximo de dominadas para eventualmente mostrar
@@ -14,7 +13,10 @@ import java.awt.event.ItemListener;
  * @author Nicolás Fernández
  */
 
-public class VentanaDominadas extends Ventana implements ItemListener, ActionListener {
+public class VentanaDominadas extends Ventana implements ActionListener {
+    private final String fuente = "Sabon Next LT";
+    private final int tamañoFuente = 14;
+
     private JComboBox numeroDeDominadas;
 
     private JButton mostrarVideoBtn;
@@ -27,6 +29,7 @@ public class VentanaDominadas extends Ventana implements ItemListener, ActionLis
      */
 
     public VentanaDominadas () {
+        this.generarEtiqueta("Dominadas", 110, 70, 300,40, "Forte", 30);
         inicializarComponentes();
         this.generarEtiqueta("Ingrese su máximo de repeticiones.",
                 35, 100, 430,80, "Impact", 20);
@@ -57,30 +60,52 @@ public class VentanaDominadas extends Ventana implements ItemListener, ActionLis
     }
 
     /**
-     * Este método genera el JComboBox de la ventana y le agrega el ItemListener
+     * Este método genera el JComboBox de la ventana.
      */
 
     private void generarComboBox() {
         numeroDeDominadas = this.generarComboBox(4, 30, 125, 220, 150, 30);
-        numeroDeDominadas.addItemListener(this);
     }
 
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        //int maxDominadas = ArchivoDeTextoControlador.getInstancia().getUsuarioEnSesion().getMaxRepsDominadas();
-        ArchivoDeTextoControlador.getInstancia().editarUsuario(20, 10);
+    private void mostrarRutina(){
+        this.generarAreaDeTexto("Recuerde descansar 2 minutos por serie.\n" + ciclo(),
+                50,400,300,120,fuente,tamañoFuente);
+    }
+
+    private String ciclo() {
+        int [] repsPorSerie = GetFitMath.generarRutinaDominadas(obtenerMaximoIngresado());
+        String a = "";
+
+        for (int i = 0; i < 4; i++) {
+
+            a += "\n Serie " + (i+1) + ": " +repsPorSerie[i] + " reps." ;
+        }
+
+        return a;
+    }
+
+    private void actualizarMaximasReps() {
+        int maxRepsFlexiones = ArchivoDeTextoControlador.getInstancia().getUsuarioEnSesion().getMaxRepsFlexiones();
+        int maxRepsDominadas = obtenerMaximoIngresado();
+
+        ArchivoDeTextoControlador.getInstancia().editarUsuario(maxRepsFlexiones, maxRepsDominadas);
+    }
+
+    private int obtenerMaximoIngresado() {
+        return Integer.parseInt(numeroDeDominadas.getSelectedItem().toString());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == aceptarBtn) {
-            //Mostrar tabla gonzalo
+            actualizarMaximasReps();
+            mostrarRutina();
         } else if(e.getSource() == regresarBtn) {
             this.dispose();
             new VentanaPrincipal();
         } else if(e.getSource() == mostrarVideoBtn) {
             this.dispose();
-            //new VentanaVideosDominadas();
+            new VentanaVideosDominadas();
         }
     }
 
