@@ -10,7 +10,7 @@ import gui.VentanaLogin;
 public class Launcher {
     /**
      * Este método crea una instancia de VentanaLogin.
-     * @param args son que se pasaron al invocar el comando.
+     * @param args son los argumentos que se pasaron al invocar el comando.
      */
     public static void main(String [] args) {
         new VentanaLogin();

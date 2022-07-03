@@ -58,14 +58,14 @@ public class ArchivoDeTextoControlador {
      * Este método junta los datos del usuario en una línea y los separa por un separador específicado.
      * Adicionalmente, establece ese usuario registrado como el usuario en sesión.
      * @param nombreUsuario es el nombre de usuario.
-     * @param contraseña es la contraseña del usuario.
+     * @param contrasena es la contrasena del usuario.
      * @param nombre es el nombre de la persona que se registra.
      * @param edad es la edad de la persona que se registra.
      * @throws IOException lanza esta excepción si ocurre un error en el proceso de escritura.
      */
 
-    public void registrarUsuario(String nombreUsuario, String contraseña, String nombre, int edad) throws IOException {
-        String lineaUsuario = String.join(SEPARADOR, nombreUsuario, contraseña, nombre, String.valueOf(edad));
+    public void registrarUsuario(String nombreUsuario, String contrasena, String nombre, int edad) throws IOException {
+        String lineaUsuario = String.join(SEPARADOR, nombreUsuario, contrasena, nombre, String.valueOf(edad));
         Files.writeString(Paths.get(DATOS_USUARIOS), lineaUsuario + "\n", StandardOpenOption.APPEND);
 
         this.usuarioEnSesion = Usuario.crearUsuario(lineaUsuario);
@@ -123,17 +123,17 @@ public class ArchivoDeTextoControlador {
     }
 
     /**
-     * Este método verifica que cierto usuario y contraseña coincida con los datos guardados en el archivo de texto.
+     * Este método verifica que cierto usuario y contrasena coincida con los datos guardados en el archivo de texto.
      * @param nombreUsuario es el nombre del usuario.
-     * @param contraseña es la contraseña del usuario.
-     * @return true si el usuario y la contraseña dada coinciden con un usuario y contraseña guardados en el
+     * @param contrasena es la contrasena del usuario.
+     * @return true si el usuario y la contrasena dada coinciden con un usuario y contrasena guardados en el
      * archivo de texto y false en caso contrario.
      */
 
-    public boolean validarUsuario(String nombreUsuario, String contraseña) {
+    public boolean validarUsuario(String nombreUsuario, String contrasena) {
         Usuario usuario = this.usuarioExiste(nombreUsuario);
 
-        if(usuario != null && usuario.getContraseña().equals(contraseña)) {
+        if(usuario != null && usuario.getContrasena().equals(contrasena)) {
             this.usuarioEnSesion = usuario;
             return true;
         }

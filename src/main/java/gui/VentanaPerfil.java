@@ -18,7 +18,7 @@ public class VentanaPerfil extends Ventana implements ActionListener {
     private JButton cerrarSesion;
 
     private final String fuente = "Sabon Next LT";
-    private final int tamañoFuente = 15;
+    private final int tamanoFuente = 15;
 
     private Usuario usuarioEnSesion = ArchivoDeTextoControlador.getInstancia().getUsuarioEnSesion();
 
@@ -58,16 +58,16 @@ public class VentanaPerfil extends Ventana implements ActionListener {
 
     private void generarEtiquetas() {
         this.generarEtiqueta("Nombre: " + usuarioEnSesion.getNombre(), 20, 300, 380, 20,
-                this.fuente, this.tamañoFuente);
+                this.fuente, this.tamanoFuente);
 
         this.generarEtiqueta("Edad: " + usuarioEnSesion.getEdad(), 20, 340, 380, 20,
-                this.fuente, this.tamañoFuente);
+                this.fuente, this.tamanoFuente);
 
         this.generarEtiqueta("Máx. flexiones: " + usuarioEnSesion.getMaxRepsFlexiones(),
-                20, 380, 150, 20, this.fuente, this.tamañoFuente);
+                20, 380, 150, 20, this.fuente, this.tamanoFuente);
 
         this.generarEtiqueta("Máx. dominadas: " + usuarioEnSesion.getMaxRepsDominadas(),
-                20, 420, 150, 20, this.fuente, this.tamañoFuente);
+                20, 420, 150, 20, this.fuente, this.tamanoFuente);
     }
 
     @Override

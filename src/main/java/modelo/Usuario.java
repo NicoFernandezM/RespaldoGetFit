@@ -4,12 +4,13 @@ import controlador.ArchivoDeTextoControlador;
 
 /**
  * Esta clase es la que representa un usuario en la aplicación.
+ *
  * @author Nicolás Fernández
  */
 
 public class Usuario {
     private String nombreUsuario;
-    private String contraseña;
+    private String contrasena;
     private String nombre;
     private int edad;
     private int maxRepsFlexiones;
@@ -20,18 +21,19 @@ public class Usuario {
     }
 
     /**
-     *Este método crea un usuario a partir del contenido de linea.
-     * @param linea contiene los datos necesarios para crear un usuario (nombreUsuario, contraseña, nombre, edad,
+     * Este método crea un usuario a partir del contenido de linea.
+     *
+     * @param linea contiene los datos necesarios para crear un usuario (nombreUsuario, contrasena, nombre, edad,
      *              maxRepsFlexiones y maxRepsDominadas).
      * @return un objeto de tipo Usuario.
      */
 
     public static Usuario crearUsuario(String linea) {
         Usuario u = new Usuario();
-        String [] lineaUsuario = linea.split(ArchivoDeTextoControlador.SEPARADOR);
+        String[] lineaUsuario = linea.split(ArchivoDeTextoControlador.SEPARADOR);
 
         u.nombreUsuario = lineaUsuario[0];
-        u.contraseña = lineaUsuario[1];
+        u.contrasena = lineaUsuario[1];
         u.nombre = lineaUsuario[2];
         u.edad = Integer.parseInt(lineaUsuario[3]);
         u.maxRepsFlexiones = lineaUsuario.length == 4 ? 0 : Integer.parseInt(lineaUsuario[4]);
@@ -42,17 +44,19 @@ public class Usuario {
 
     /**
      * Este método junta todos los atributos de un usuario en un String.
+     *
      * @return un String con los atributos de un usuario separados por un separador específicado.
      */
 
     public String generarEntradaUsuario() {
         return String.join(ArchivoDeTextoControlador.SEPARADOR, nombreUsuario,
-                contraseña, nombre, String.valueOf(edad), String.valueOf(maxRepsFlexiones),
+                contrasena, nombre, String.valueOf(edad), String.valueOf(maxRepsFlexiones),
                 String.valueOf(maxRepsDominadas));
     }
 
     /**
      * Este método permite obtener el nombre de la persona registrada.
+     *
      * @return un String con el nombre de la persona registrada.
      */
 
@@ -62,6 +66,7 @@ public class Usuario {
 
     /**
      * Este método permite obtener la edad de la persona registrada.
+     *
      * @return un int con la edad del usuario.
      */
 
@@ -71,6 +76,7 @@ public class Usuario {
 
     /**
      * Este método permite obtener el máximo de repeticiones de flexiones del usuario.
+     *
      * @return un int con el máximo de repeticiones de flexiones del usuario.
      */
 
@@ -80,6 +86,7 @@ public class Usuario {
 
     /**
      * Este método permite obtener el máximo de repeticiones de dominadas del usuario.
+     *
      * @return un int con el máximo de repeticiones de dominadas del usuario.
      */
 
@@ -88,16 +95,18 @@ public class Usuario {
     }
 
     /**
-     * Este método permite obtener la contraseña del usuario.
-     * @return un String con la contraseña del usuario.
+     * Este método permite obtener la contrasena del usuario.
+     *
+     * @return un String con la contrasena del usuario.
      */
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasena() {
+        return contrasena;
     }
 
     /**
      * Este método permite obtener el nombre de usuario.
+     *
      * @return un String con el nombre de usuario.
      */
 
@@ -107,6 +116,7 @@ public class Usuario {
 
     /**
      * Este método permite establecer el máximo de repeticiones de flexiones de brazos de un usuario.
+     *
      * @param maxRepsFlexiones es el máximo de repeticiones de flexiones de brazos de un usuario.
      */
 
@@ -116,6 +126,7 @@ public class Usuario {
 
     /**
      * Este método permite establecer el máximo de repeticiones de dominadas de un usuario.
+     *
      * @param maxRepsDominadas es el máximo de repeticiones de dominadas de un usuario.
      */
 

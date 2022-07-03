@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 
 public class VentanaDominadas extends Ventana implements ActionListener {
     private final String fuente = "Sabon Next LT";
-    private final int tamañoFuente = 14;
+    private final int tamanoFuente = 14;
 
     private JComboBox numeroDeDominadas;
 
@@ -64,7 +64,7 @@ public class VentanaDominadas extends Ventana implements ActionListener {
      */
 
     private void generarComboBox() {
-        numeroDeDominadas = this.generarComboBox(4, 30, 125, 220, 150, 30);
+        numeroDeDominadas = this.generarComboBox(4, 40, 125, 220, 150, 30);
     }
 
     /**
@@ -73,7 +73,7 @@ public class VentanaDominadas extends Ventana implements ActionListener {
 
     private void mostrarRutina(){
         this.generarAreaDeTexto("Recuerde descansar 2 minutos por serie.\n" + ciclo(),
-                50,400,300,120,fuente,tamañoFuente);
+                50,400,300,120,fuente,tamanoFuente);
     }
 
     /**

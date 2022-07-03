@@ -18,12 +18,12 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
     private JButton regresarBtn;
 
     private final String fuente = "Sabon Next LT";
-    private final int tamañoFuente = 10;
+    private final int tamanoFuente = 10;
 
     private JTextField nombre;
     private JTextField apellido;
     private JTextField usuario;
-    private JPasswordField contraseña;
+    private JPasswordField contrasena;
     private JTextField edad;
 
     /**
@@ -65,7 +65,7 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
         this.nombre = this.generarCampoDeTexto(100, 150, 200, 20);
         this.apellido = this.generarCampoDeTexto(100, 200, 200, 20);
         this.usuario = this.generarCampoDeTexto(100, 250, 200, 20);
-        this.contraseña = this.generarCampoDeTextoContraseña(100, 300, 200, 20);
+        this.contrasena = this.generarCampoDeTextoContrasena(100, 300, 200, 20);
         this.edad = this.generarCampoDeTexto(100, 350, 200, 20);
     }
 
@@ -77,19 +77,19 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
         this.generarEtiqueta("Registrar", 130, 50, 150,80, "Forte", 35);
 
         this.generarEtiqueta("Nombre: ", 20, 150, 70, 20,
-                this.fuente, this.tamañoFuente);
+                this.fuente, this.tamanoFuente);
 
         this.generarEtiqueta("Apellido: ", 20, 200, 70, 20,
-                this.fuente, this.tamañoFuente);
+                this.fuente, this.tamanoFuente);
 
         this.generarEtiqueta("Usuario: ", 20, 250, 70, 20,
-                this.fuente, this.tamañoFuente);
+                this.fuente, this.tamanoFuente);
 
-        this.generarEtiqueta("Contraseña: ", 20, 300, 70, 20,
-                this.fuente, this.tamañoFuente);
+        this.generarEtiqueta("Contrasena: ", 20, 300, 70, 20,
+                this.fuente, this.tamanoFuente);
 
         this.generarEtiqueta("Edad: ", 20, 350, 70, 20,
-                this.fuente, this.tamañoFuente);
+                this.fuente, this.tamanoFuente);
     }
 
     /**
@@ -127,7 +127,7 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
 
     private boolean entradasVacias() {
         return (this.nombre.getText().isEmpty() || this.apellido.getText().isEmpty() ||
-                this.usuario.getText().isEmpty() || obtenerContraseña().isEmpty() ||
+                this.usuario.getText().isEmpty() || obtenerContrasena().isEmpty() ||
                 this.edad.getText().isEmpty());
     }
 
@@ -141,14 +141,14 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
     }
 
     /**
-     * Este método obtiene la contraseña del JPasswordField.
-     * @return un String con la contraseña sin espacios ni puntuación.
+     * Este método obtiene la contrasena del JPasswordField.
+     * @return un String con la contrasena sin espacios ni puntuación.
      */
 
-    private String obtenerContraseña() {
-        String contraseña = Arrays.toString(this.contraseña.getPassword());
+    private String obtenerContrasena() {
+        String contrasena = Arrays.toString(this.contrasena.getPassword());
 
-        return String.join(",", contraseña).
+        return String.join(",", contrasena).
                 replaceAll("\\p{Punct}", "").replaceAll(" ", "");
     }
 
@@ -174,7 +174,7 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
         nombre.setText("");
         apellido.setText("");
         usuario.setText("");
-        contraseña.setText("");
+        contrasena.setText("");
         edad.setText("");
     }
 
@@ -200,7 +200,7 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
 
         try {
             if(!usuarioExiste() && entradasValidas()) {
-                controlador.registrarUsuario(obtenerUsuario(), obtenerContraseña(),
+                controlador.registrarUsuario(obtenerUsuario(), obtenerContrasena(),
                         unirNombreYApellido(), Integer.parseInt(this.edad.getText()));
 
                 new VentanaPrincipal();

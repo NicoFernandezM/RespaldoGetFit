@@ -17,10 +17,10 @@ public class VentanaInicioSesion extends Ventana implements ActionListener {
     private JButton regresarBtn;
 
     protected final String fuente = "Sabon Next LT";
-    protected final int tamañoFuente = 10;
+    protected final int tamanoFuente = 10;
 
     private JTextField usuario;
-    private JPasswordField contraseña;
+    private JPasswordField contrasena;
 
     /**
      * El constructor de esta clase llama al método que inicializa los componentes que se muestran en esta ventana,
@@ -59,7 +59,7 @@ public class VentanaInicioSesion extends Ventana implements ActionListener {
 
     private void generarCamposDeTexto() {
         this.usuario = this.generarCampoDeTexto(100, 250, 200, 20);
-        this.contraseña = this.generarCampoDeTextoContraseña(100, 300, 200, 20);
+        this.contrasena = this.generarCampoDeTextoContrasena(100, 300, 200, 20);
     }
 
     /**
@@ -71,31 +71,31 @@ public class VentanaInicioSesion extends Ventana implements ActionListener {
                 "Forte", 30);
 
         this.generarEtiqueta("Usuario: ", 20, 250, 70, 20,
-                this.fuente, this.tamañoFuente);
+                this.fuente, this.tamanoFuente);
 
-        this.generarEtiqueta("Contraseña: ", 20, 300, 70, 20,
-                this.fuente, this.tamañoFuente);
+        this.generarEtiqueta("Contrasena: ", 20, 300, 70, 20,
+                this.fuente, this.tamanoFuente);
     }
 
     /**
-     * Este método obtiene la contraseña del JPasswordField.
-     * @return un String con la contraseña sin espacios ni puntuación.
+     * Este método obtiene la contrasena del JPasswordField.
+     * @return un String con la contrasena sin espacios ni puntuación.
      */
-    private String obtenerContraseña() {
-        String contraseña = Arrays.toString(this.contraseña.getPassword());
+    private String obtenerContrasena() {
+        String contrasena = Arrays.toString(this.contrasena.getPassword());
 
-        return String.join(",", contraseña).
+        return String.join(",", contrasena).
                 replaceAll("\\p{Punct}", "").replaceAll(" ", "");
     }
 
     /**
-     * Este método verifica que el usuario ingresado corresponda con la contraseña ingresada.
-     * @return true si la contraseña ingresada coincide con la contraseña asociada a ese usuario
+     * Este método verifica que el usuario ingresado corresponda con la contrasena ingresada.
+     * @return true si la contrasena ingresada coincide con la contrasena asociada a ese usuario
      * y false en el caso contrario.
      */
 
     private boolean usuarioValido() {
-        return ArchivoDeTextoControlador.getInstancia().validarUsuario(this.usuario.getText(), obtenerContraseña());
+        return ArchivoDeTextoControlador.getInstancia().validarUsuario(this.usuario.getText(), obtenerContrasena());
     }
 
     /**
@@ -108,7 +108,7 @@ public class VentanaInicioSesion extends Ventana implements ActionListener {
             new VentanaPrincipal();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta",
+            JOptionPane.showMessageDialog(this, "Usuario o contrasena incorrecta",
                     "Ingreso inválido", JOptionPane.WARNING_MESSAGE);
         }
     }

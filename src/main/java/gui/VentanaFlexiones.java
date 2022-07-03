@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 
 public class VentanaFlexiones extends Ventana implements ActionListener {
     private final String fuente = "Sabon Next LT";
-    private final int tamañoFuente = 14;
+    private final int tamanoFuente = 14;
 
     private JComboBox numeroDeFlexiones;
 
@@ -63,7 +63,7 @@ public class VentanaFlexiones extends Ventana implements ActionListener {
      */
 
     private void generarComboBox() {
-        numeroDeFlexiones = this.generarComboBox(4, 30, 125, 220, 150, 30);
+        numeroDeFlexiones = this.generarComboBox(4, 60, 125, 220, 150, 30);
     }
 
     /**
@@ -72,7 +72,7 @@ public class VentanaFlexiones extends Ventana implements ActionListener {
 
     private void mostrarRutina(){
         this.generarAreaDeTexto("Recuerde descansar 2 minutos por serie.\n" + ciclo(),
-                50,400,300,120,fuente,tamañoFuente);
+                50,400,300,120,fuente,tamanoFuente);
     }
 
     /**

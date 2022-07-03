@@ -12,7 +12,7 @@ public abstract class Ventana extends JFrame {
     /**
      * El constructor establece las características por default que deben tener todas las ventanas.
      * Por ejemplo que se termine el proceso al presionar la "x", que no se pueda redimensionar, que se cree
-     * en el centro de la pantalla y que sea visible. Se define también el tamaño, titulo y el layout.
+     * en el centro de la pantalla y que sea visible. Se define también el tamano, titulo y el layout.
      */
     public Ventana() {
         this.setLayout(null);
@@ -47,10 +47,10 @@ public abstract class Ventana extends JFrame {
      * @param y Es la posición en "y" en que se creará el JPasswordField dentro de la ventana.
      * @param ancho Es el ancho que tendrá el JPasswordField.
      * @param alto Es el alto que tendrá el JPasswordField.
-     * @return El JPasswordField para contraseña (ya agregado a la ventana) con las posiciones y dimensiones indicadas.
+     * @return El JPasswordField para contrasena (ya agregado a la ventana) con las posiciones y dimensiones indicadas.
      */
 
-    protected JPasswordField generarCampoDeTextoContraseña(int x, int y, int ancho, int alto) {
+    protected JPasswordField generarCampoDeTextoContrasena(int x, int y, int ancho, int alto) {
         JPasswordField campoDeTexto = new JPasswordField();
         this.add(campoDeTexto);
         campoDeTexto.setBounds(x, y, ancho, alto);
@@ -101,14 +101,14 @@ public abstract class Ventana extends JFrame {
      * @param ancho Es el ancho que tendrá el JLabel.
      * @param alto Es el alto que tendrá el JLabel.
      * @param fuente Es el nombre de la fuente que tendrá el JLabel.
-     * @param tamaño Es el tamaño de la fuente que tendrá el JLabel.
+     * @param tamano Es el tamano de la fuente que tendrá el JLabel.
      * @return El JLabel (ya agregado a la ventana) con el texto, fuente, posiciones y dimensiones indicadas.
      */
 
-    protected JLabel generarEtiqueta (String texto, int x, int y, int ancho, int alto, String fuente, int tamaño) {
+    protected JLabel generarEtiqueta (String texto, int x, int y, int ancho, int alto, String fuente, int tamano) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setBounds(x, y, ancho, alto);
-        Font font = new Font(fuente, Font.BOLD, tamaño);
+        Font font = new Font(fuente, Font.BOLD, tamano);
         etiqueta.setFont(font);
         this.add(etiqueta);
         return etiqueta;
@@ -122,16 +122,16 @@ public abstract class Ventana extends JFrame {
      * @param ancho Es el ancho que tendrá el JTextArea.
      * @param alto Es el alto que tendrá el JTextArea.
      * @param fuente Es el nombre de la fuente que tendrá el JTextArea.
-     * @param tamaño Es el tamaño de la fuente que tendrá el JTextArea.
+     * @param tamano Es el tamano de la fuente que tendrá el JTextArea.
      * @return El JTextArea (ya agregado a la ventana) con el texto, fuente, posiciones y dimensiones indicadas.
      */
 
-    protected JTextArea generarAreaDeTexto (String texto, int x, int y, int ancho, int alto, String fuente, int tamaño) {
+    protected JTextArea generarAreaDeTexto (String texto, int x, int y, int ancho, int alto, String fuente, int tamano) {
         JTextArea areaDeTexto = new JTextArea(texto);
         this.add(areaDeTexto);
 
         areaDeTexto.setBounds(x, y, ancho, alto);
-        Font font = new Font(fuente, Font.BOLD, tamaño);
+        Font font = new Font(fuente, Font.BOLD, tamano);
         areaDeTexto.setFont(font);
         areaDeTexto.setEditable(false);
 
