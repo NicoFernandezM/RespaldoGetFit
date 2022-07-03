@@ -1,5 +1,10 @@
 package utils;
 
+/**
+ * Esta clase contiene los métodos necesarios para calcular las rutinas de las dominadas y flexiones.
+ * @author Nicolás Fernández
+ */
+
 public class GetFitMath {
 
     private static int[] generarRutina(int numeroIngresado, int[] repsPorSeries) {
