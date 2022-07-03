@@ -9,7 +9,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 /**
- * Esta ventana es la que contiene la opción de ingresar el máximo de dominadas para eventualmente mostrar
+ * Esta clase es la ventana que contiene la opción de ingresar el máximo de dominadas para eventualmente mostrar
  * la rutina. También contiene la opción de ver videos explicativos.
  * @author Nicolás Fernández
  */
@@ -23,7 +23,7 @@ public class VentanaDominadas extends Ventana implements ItemListener, ActionLis
 
     /**
      * El constructor de esta clase llama al método que inicializa los componentes que se muestran en esta ventana,
-     * tales como JButton y JComboBox. De forma adicional también inicializa un JLabel.
+     * tales como JButton y JComboBox. De forma adicional también inicializa un JLabel con el titulo.
      */
 
     public VentanaDominadas () {

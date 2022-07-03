@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 /**
- * Esta es la ventana que nos muestra los componenetes necesarios para iniciar sesión.
+ * Esta clase es la ventana que muestra los componenetes necesarios para iniciar sesión.
  * @author Nicolás Fernández
  */
 
@@ -79,7 +79,7 @@ public class VentanaInicioSesion extends Ventana implements ActionListener {
 
     /**
      * Este método obtiene la contraseña del JPasswordField.
-     * @return La contraseña sin espacios ni puntuación.
+     * @return un String con la contraseña sin espacios ni puntuación.
      */
     private String obtenerContraseña() {
         String contraseña = Arrays.toString(this.contraseña.getPassword());
@@ -100,7 +100,7 @@ public class VentanaInicioSesion extends Ventana implements ActionListener {
 
     /**
      * Este método abre la ventana principal en caso de que los datos del usuario sean correctos y se muestra
-     * un mensaje en el caso contrario.
+     * un mensaje de advertencia en el caso contrario.
      */
 
     private void iniciarSesion() {

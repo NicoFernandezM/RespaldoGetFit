@@ -7,26 +7,42 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase es la ventana que nos muestra los datos del usuario (nombre, edad, y máximas repeticiones en
+ * flexiones y dominadas) y además nos da la opción de cerrar la sesión.
+ * @author Nicolás Fernández
+ */
+
 public class VentanaPerfil extends Ventana implements ActionListener {
     private JButton regresar;
     private JButton cerrarSesion;
-    private JLabel nombre;
-    private JLabel edad;
-    private JLabel maxFlexiones;
-    private JLabel maxDominadas;
-    protected final String fuente = "Sabon Next LT";
-    protected final int tamañoFuente = 15;
-    //Está bien esto definido como atributo?
+
+    private final String fuente = "Sabon Next LT";
+    private final int tamañoFuente = 15;
+
     private Usuario usuarioEnSesion = ArchivoDeTextoControlador.getInstancia().getUsuarioEnSesion();
+
+    /**
+     * El constructor de esta clase llama al método que inicializa los componentes que se muestran en esta ventana,
+     * tales como JButton y JLabel.
+     */
 
     public VentanaPerfil() {
         inicializarComponentes();
     }
 
+    /**
+     * Este método llama a los métodos que generan los JButton y JLabel.
+     */
+
     private void inicializarComponentes() {
         generarBotones();
         generarEtiquetas();
     }
+
+    /**
+     * Este método genera los JButton de la ventana y les agrega el ActionListener.
+     */
 
     private void generarBotones() {
         regresar = this.generarBoton("<--", 20, 15, 50, 30);
@@ -36,14 +52,21 @@ public class VentanaPerfil extends Ventana implements ActionListener {
         cerrarSesion.addActionListener(this);
     }
 
+    /**
+     * Este método genera los JLabel de la ventana.
+     */
+
     private void generarEtiquetas() {
-        nombre = this.generarEtiqueta("Nombre: " + usuarioEnSesion.getNombre(), 20, 300, 380, 20,
+        this.generarEtiqueta("Nombre: " + usuarioEnSesion.getNombre(), 20, 300, 380, 20,
                 this.fuente, this.tamañoFuente);
-        edad = this.generarEtiqueta("Edad: " + usuarioEnSesion.getEdad(), 20, 340, 380, 20,
+
+        this.generarEtiqueta("Edad: " + usuarioEnSesion.getEdad(), 20, 340, 380, 20,
                 this.fuente, this.tamañoFuente);
-        maxFlexiones = this.generarEtiqueta("Máx. flexiones: " + usuarioEnSesion.getMaxRepsFlexiones(),
+
+        this.generarEtiqueta("Máx. flexiones: " + usuarioEnSesion.getMaxRepsFlexiones(),
                 20, 380, 150, 20, this.fuente, this.tamañoFuente);
-        maxDominadas = this.generarEtiqueta("Máx. dominadas: " + usuarioEnSesion.getMaxRepsDominadas(),
+
+        this.generarEtiqueta("Máx. dominadas: " + usuarioEnSesion.getMaxRepsDominadas(),
                 20, 420, 150, 20, this.fuente, this.tamañoFuente);
     }
 

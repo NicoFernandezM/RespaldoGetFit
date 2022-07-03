@@ -8,12 +8,17 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * Esta clase es la ventana que muestra los componentes necesarios para registrar un nuevo usuario.
+ * @author Nicolás Fernández
+ */
+
 public class VentanaRegistroUsuario extends Ventana implements ActionListener {
     private JButton registrarBtn;
     private JButton regresarBtn;
 
-    protected final String fuente = "Sabon Next LT";
-    protected final int tamañoFuente = 10;
+    private final String fuente = "Sabon Next LT";
+    private final int tamañoFuente = 10;
 
     private JTextField nombre;
     private JTextField apellido;
@@ -21,15 +26,28 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
     private JPasswordField contraseña;
     private JTextField edad;
 
+    /**
+     * El constructor de esta clase llama al método que inicializa los componentes que se muestran en esta ventana,
+     * tales como JButton, JLabel y JTextField.
+     */
+
     public VentanaRegistroUsuario() {
         inicializarComponentes();
     }
+
+    /**
+     * Este método llama a los métodos que generan los JButton, JLabel y JTextField.
+     */
 
     private void inicializarComponentes() {
         generarBotones();
         generarEtiquetas();
         generarCamposDeTexto();
     }
+
+    /**
+     * Este método genera los JButton de la ventana y les agrega el ActionListener.
+     */
 
     private void generarBotones() {
         regresarBtn = this.generarBoton("<--", 20, 15, 50, 30);
@@ -39,6 +57,10 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
         registrarBtn.addActionListener(this);
     }
 
+    /**
+     * Este método genera los JTextField de la ventana .
+     */
+
     private void generarCamposDeTexto() {
         this.nombre = this.generarCampoDeTexto(100, 150, 200, 20);
         this.apellido = this.generarCampoDeTexto(100, 200, 200, 20);
@@ -46,6 +68,10 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
         this.contraseña = this.generarCampoDeTextoContraseña(100, 300, 200, 20);
         this.edad = this.generarCampoDeTexto(100, 350, 200, 20);
     }
+
+    /**
+     * Este método genera los JLabel de la ventana.
+     */
 
     private void generarEtiquetas() {
         this.generarEtiqueta("Registrar", 130, 50, 150,80, "Forte", 35);
@@ -66,29 +92,58 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
                 this.fuente, this.tamañoFuente);
     }
 
+    /**
+     * Este método verifica que las entradas sean validas.
+     * @return true si el nombre y la edad son válidos y si ninguna entrada está vacía.
+     * En caso contrario retorna false.
+     */
     private boolean entradasValidas() {
         return (nombreValido() && !entradasVacias() && edadValida());
     }
+
+    /**
+     * Este método verifica que el nombre contenga solo letras.
+     * @return true si el nombre contiene solo letras y false en caso contrario.
+     */
 
     private boolean nombreValido() {
         String nombre = unirNombreYApellido().replaceAll(" ","");
         return (nombre.matches("[a-zA-Z]+"));
     }
 
+    /**
+     * Este método une el nombre y apellido en un solo String.
+     * @return un String con el nombre y apellido separados por un espacio.
+     */
     private String unirNombreYApellido() {
         return this.nombre.getText().replaceAll(" ","") + " " +
                 this.apellido.getText().replaceAll(" ","");
     }
 
+    /**
+     * Este método valida si hay algun JTextfield vacío.
+     * @return true si por lo menos un JTextField está vacío y false si es que ninguno está vacío.
+     */
+
     private boolean entradasVacias() {
-        return (this.nombre.getText().isEmpty() && this.apellido.getText().isEmpty() &&
-                this.usuario.getText().isEmpty() && obtenerContraseña().isEmpty() &&
+        return (this.nombre.getText().isEmpty() || this.apellido.getText().isEmpty() ||
+                this.usuario.getText().isEmpty() || obtenerContraseña().isEmpty() ||
                 this.edad.getText().isEmpty());
     }
+
+    /**
+     * Este método obtiene texto del JTextField correspondiente al usuario
+     * @return el texto del JTextField del usuario sin espacios.
+     */
 
     private String obtenerUsuario() {
         return this.usuario.getText().replaceAll(" ","");
     }
+
+    /**
+     * Este método obtiene la contraseña del JPasswordField.
+     * @return un String con la contraseña sin espacios ni puntuación.
+     */
 
     private String obtenerContraseña() {
         String contraseña = Arrays.toString(this.contraseña.getPassword());
@@ -96,6 +151,11 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
         return String.join(",", contraseña).
                 replaceAll("\\p{Punct}", "").replaceAll(" ", "");
     }
+
+    /**
+     * Este método verifica que la edad sea válida.
+     * @return true si el JTextField correspondiente a la edad tiene un número entre 5 y 100 y false en caso contrario.
+     */
 
     private boolean edadValida() {
         try {
@@ -106,6 +166,10 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
         }
     }
 
+    /**
+     * Este método establece el texto de todos los JTextField a un espacio en blanco.
+     */
+
     private void limpiarTextField() {
         nombre.setText("");
         apellido.setText("");
@@ -114,10 +178,22 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
         edad.setText("");
     }
 
+    /**
+     * Este método verifica que el nombre ingresado en el JTextField de usuario existe.
+     * @return true si el usuario existe y false en caso contrario.
+     */
+
     private boolean usuarioExiste() {
         ArchivoDeTextoControlador c = ArchivoDeTextoControlador.getInstancia();
         return c.usuarioExiste(this.usuario.getText()) != null;
     }
+
+    /**
+     * Este método intenta registrar un usuario en caso de que no exista previamente y que las entradas sean
+     * válidas para posteriormente mostrar la ventana principal. Si las entradas no son validas o el usuario ya existe,
+     * se muestra un mensaje de advertencia. Puede ocurrir un error al tratar de hacer lo anterior, y en ese caso
+     * muestra un mensaje informando que algo falló.
+     */
 
     private void registrarUsuario() {
         ArchivoDeTextoControlador controlador = ArchivoDeTextoControlador.getInstancia();
@@ -136,6 +212,10 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
             }
         } catch (IOException ex) {
             ex.printStackTrace();
+
+            JOptionPane.showMessageDialog(this, "Algo falló",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            limpiarTextField();
         }
     }
 

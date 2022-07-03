@@ -4,20 +4,30 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase es la ventana principal de la aplicación. Tiene 3 botones que dan la opción de ir a la ventana
+ * de dominadas, flexiones o perfil.
+ * @author Nicolás Fernández
+ */
+
 public class VentanaPrincipal extends Ventana implements ActionListener {
     private JButton flexiones;
     private JButton dominadas;
     private JButton perfil;
 
+    /**
+     * El constructor de esta clase llama al método que genera los JButton de esta ventana.
+     * De forma adicional también inicializa un JLabel con el titulo.
+     */
+
     public VentanaPrincipal () {
         this.generarEtiqueta("GetFit", 155, 100, 150,80, "Forte", 30);
-        inicializarComponentes();
-        //perfil.setIcon(Imagenes.getImagenPerfil());
-    }
-
-    private void inicializarComponentes() {
         generarBotones();
     }
+
+    /**
+     * Este método genera los JButton de la ventana y les agrega el ActionListener.
+     */
 
     private void generarBotones() {
         flexiones = this.generarBoton("Flexiones", 125, 200, 150, 80);
