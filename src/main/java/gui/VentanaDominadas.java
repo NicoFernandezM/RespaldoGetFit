@@ -67,10 +67,19 @@ public class VentanaDominadas extends Ventana implements ActionListener {
         numeroDeDominadas = this.generarComboBox(4, 30, 125, 220, 150, 30);
     }
 
+    /**
+     * Este metodo genera el Area de texto de la Ventana destinada a mostrar la rutina.
+     */
+
     private void mostrarRutina(){
         this.generarAreaDeTexto("Recuerde descansar 2 minutos por serie.\n" + ciclo(),
                 50,400,300,120,fuente,tamañoFuente);
     }
+
+    /**
+     * Este método obtiene la rutina generada por la clase GetFitMath de acuerdo al máximo.
+     * @return un String con el número de series y repeticiones.
+     */
 
     private String ciclo() {
         int [] repsPorSerie = GetFitMath.generarRutinaDominadas(obtenerMaximoIngresado());
@@ -84,12 +93,21 @@ public class VentanaDominadas extends Ventana implements ActionListener {
         return a;
     }
 
+    /**
+     * Este método actualiza las máximas repeticiones de un usuario en dominadas.
+     */
+
     private void actualizarMaximasReps() {
         int maxRepsFlexiones = ArchivoDeTextoControlador.getInstancia().getUsuarioEnSesion().getMaxRepsFlexiones();
         int maxRepsDominadas = obtenerMaximoIngresado();
 
         ArchivoDeTextoControlador.getInstancia().editarUsuario(maxRepsFlexiones, maxRepsDominadas);
     }
+
+    /**
+     * Este método obtiene el máximo ingresado por el usuario en el JComboBox.
+     * @return un int que representa el máximo ingresado por el usuario.
+     */
 
     private int obtenerMaximoIngresado() {
         return Integer.parseInt(numeroDeDominadas.getSelectedItem().toString());

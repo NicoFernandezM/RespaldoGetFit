@@ -1,4 +1,0 @@
-como;como;como como;20
-nombre;nombre;Nombre Apellido;20
-nico;nico;nico nico;20;10;7
-

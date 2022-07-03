@@ -4,13 +4,28 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase es una ventana que contiene un video explicativo de como hacer las dominadas y presenta la opción de
+ * volver a la ventana VentanaVideosDominadas.
+ * @author Juan Villagrán.
+ */
+
 public class VentanaVideosDominadas2 extends Ventana implements ActionListener{
 
     private JButton volverBtn;
 
+    /**
+     * El constructor de esta clase llama al método que inicializa los componentes que se muestran en esta ventana,
+     * tales como JButton, JLabel y gif's.
+     */
+
     public VentanaVideosDominadas2() {
         inicializarcomponentes();
     }
+
+    /**
+     * Este método llama a los métodos que generan los JButton y JLabel y gif's.
+     */
 
     public void inicializarcomponentes() {
         generarBotones();
@@ -18,10 +33,18 @@ public class VentanaVideosDominadas2 extends Ventana implements ActionListener{
         this.generarLabelConGif("gif\\Dominadas2.gif", 0, 5, 400, 350);
     }
 
+    /**
+     * Este método genera los JButton de la ventana y les agrega el ActionListener.
+     */
+
     private void generarBotones() {
         volverBtn = this.generarBoton("Volver", 150, 522, 100, 30);
         volverBtn.addActionListener(this);
     }
+
+    /**
+     * Este método genera el JTextArea que contiene el texto explicativo de como hacer una dominada.
+     */
 
     private void generarEtiquetas() {
         String texto = """
