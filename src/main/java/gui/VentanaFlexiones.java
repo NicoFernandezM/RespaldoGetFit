@@ -29,6 +29,8 @@ public class VentanaFlexiones extends Ventana implements ActionListener {
      */
 
     public VentanaFlexiones () {
+        //Se le agregó el titulo.
+        this.generarEtiqueta("Flexiones", 130, 70, 300,40, "Forte", 30);
         inicializarComponentes();
         this.generarEtiqueta("Ingrese su máximo de repeticiones.",
                 35, 100, 430,80, "Impact", 20);
@@ -81,7 +83,8 @@ public class VentanaFlexiones extends Ventana implements ActionListener {
      */
 
     private String ciclo() {
-        int [] repsPorSerie = GetFitMath.generarRutinaDominadas(obtenerMaximoIngresado());
+        //Correción llamado función
+        int [] repsPorSerie = GetFitMath.generarRutinaFlexiones(obtenerMaximoIngresado());
         String a = "";
 
         for (int i = 0; i < 4; i++) {

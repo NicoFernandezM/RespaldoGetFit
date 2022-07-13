@@ -21,7 +21,7 @@ public class VentanaVideosFlexiones extends Ventana implements ActionListener {
      */
 
     public VentanaVideosFlexiones() {
-        this.generarEtiqueta("Flexiones", 120, 20, 300,40, "Forte", 30);
+        this.generarEtiqueta("Flexiones", 130, 20, 300,40, "Forte", 30);
         inicializarcomponentes();
     }
 

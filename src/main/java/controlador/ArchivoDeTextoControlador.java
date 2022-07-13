@@ -1,5 +1,6 @@
 package controlador;
 
+import error.UsuarioNoEncontradoException;
 import modelo.Usuario;
 
 import java.io.File;
@@ -16,10 +17,10 @@ import java.util.stream.IntStream;
  */
 
 public class ArchivoDeTextoControlador {
-    private static ArchivoDeTextoControlador instancia = null;
+    private static ArchivoDeTextoControlador instancia;
 
-    private static final String DATOS_USUARIOS = "DatosUsuarios.txt" ;
-    public static final String SEPARADOR =  ";";
+    private static String DATOS_USUARIOS;
+    public static final String SEPARADOR = ";";
 
     private Usuario usuarioEnSesion;
 
@@ -27,11 +28,11 @@ public class ArchivoDeTextoControlador {
      * Este constructor permite crear un archivo con la dirección indicada en caso de que no exista.
      */
 
-    private ArchivoDeTextoControlador() {
+    private ArchivoDeTextoControlador(String ruta) {
         try {
-            File file = new File(DATOS_USUARIOS);
+            File file = new File(ruta);
 
-            if(!file.exists()) {
+            if (!file.exists()) {
                 file.createNewFile();
             }
 
@@ -42,13 +43,24 @@ public class ArchivoDeTextoControlador {
 
     /**
      * Este método permite obtener una unica instancia de la clase.
+     *
      * @return una instancia de la clase, en caso de que ya exista una retorna esa instancia, en caso contrario
      * hace una instancia y la retorna.
      */
 
     public static ArchivoDeTextoControlador getInstancia() {
-        if(instancia == null) {
-            instancia = new ArchivoDeTextoControlador();
+        if (instancia == null) {
+            DATOS_USUARIOS = "DatosUsuarios.txt";
+            instancia = new ArchivoDeTextoControlador(DATOS_USUARIOS);
+        }
+
+        return instancia;
+    }
+
+    public static ArchivoDeTextoControlador getInstancia(String ruta) {
+        if (instancia == null) {
+            DATOS_USUARIOS = ruta;
+            instancia = new ArchivoDeTextoControlador(ruta);
         }
 
         return instancia;
@@ -57,10 +69,11 @@ public class ArchivoDeTextoControlador {
     /**
      * Este método junta los datos del usuario en una línea y los separa por un separador específicado.
      * Adicionalmente, establece ese usuario registrado como el usuario en sesión.
+     *
      * @param nombreUsuario es el nombre de usuario.
-     * @param contrasena es la contrasena del usuario.
-     * @param nombre es el nombre de la persona que se registra.
-     * @param edad es la edad de la persona que se registra.
+     * @param contrasena    es la contrasena del usuario.
+     * @param nombre        es el nombre de la persona que se registra.
+     * @param edad          es la edad de la persona que se registra.
      * @throws IOException lanza esta excepción si ocurre un error en el proceso de escritura.
      */
 
@@ -78,21 +91,25 @@ public class ArchivoDeTextoControlador {
      * contrario retorna null.
      */
 
-    public Usuario usuarioExiste(String nombreUsuario) {
-        try {
-            List<String> content = Files.readAllLines(Paths.get(DATOS_USUARIOS));
+    public Usuario buscarUsuario(String nombreUsuario) throws IOException {
 
-            for (String entradaUsuario: content) {
-                String a = entradaUsuario.split(SEPARADOR)[0];
-                if(a.equals(nombreUsuario)) {
-                    return Usuario.crearUsuario(entradaUsuario);
-                }
+        List<String> content = Files.readAllLines(Paths.get(DATOS_USUARIOS));
+
+        for (String entradaUsuario: content) {
+            String nombreUsuarioEnLista = entradaUsuario.split(SEPARADOR)[0];
+            if(nombreUsuarioEnLista.equals(nombreUsuario)) {
+                return Usuario.crearUsuario(entradaUsuario);
             }
-            return null;
-        }catch (IOException ioException) {
+        }
+        throw new UsuarioNoEncontradoException(nombreUsuario);
+    }
+
+    public Usuario buscarUsuarioSiExiste(String nombreUsuario) {
+        try {
+            return buscarUsuario(nombreUsuario);
+        }catch (IOException | UsuarioNoEncontradoException e) {
             return null;
         }
-
     }
 
     /**
@@ -131,7 +148,7 @@ public class ArchivoDeTextoControlador {
      */
 
     public boolean validarUsuario(String nombreUsuario, String contrasena) {
-        Usuario usuario = this.usuarioExiste(nombreUsuario);
+        Usuario usuario = this.buscarUsuarioSiExiste(nombreUsuario);
 
         if(usuario != null && usuario.getContrasena().equals(contrasena)) {
             this.usuarioEnSesion = usuario;
@@ -148,6 +165,12 @@ public class ArchivoDeTextoControlador {
 
     public Usuario getUsuarioEnSesion() {
         return usuarioEnSesion;
+    }
+
+    public void borrarLista() {
+        File file = new File(DATOS_USUARIOS);
+        file.delete();
+        instancia = null;
     }
 
 }

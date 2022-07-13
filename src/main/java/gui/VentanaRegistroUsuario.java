@@ -185,7 +185,7 @@ public class VentanaRegistroUsuario extends Ventana implements ActionListener {
 
     private boolean usuarioExiste() {
         ArchivoDeTextoControlador c = ArchivoDeTextoControlador.getInstancia();
-        return c.usuarioExiste(this.usuario.getText()) != null;
+        return c.buscarUsuarioSiExiste(this.usuario.getText()) != null;
     }
 
     /**
